@@ -9,6 +9,8 @@ const ImageCrop = () => {
   const [openModal, setOpenModal] = useState(false);
   const [preview, setPreview] = useState(user1);
 
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
   const { getProcessedImage, setImage, resetStates } = useImageCropContext();
 
   const handleDone = async () => {
@@ -25,18 +27,31 @@ const ImageCrop = () => {
     setOpenModal(true);
   };
 
+  const toggleOverlay = () => {
+    etIsOverlayOpen(!isOverlayOpen);
+  }
+
+  const Overlay = () => {
+    return (
+        <div><p>Hansani</p></div>
+    )
+  };
+
+
+
   return (
     <div className="bg-gray-100 h-screen flex justify-center items-center">
-      <button onClick={toggleOverlay}>Open Overlay</button>
-      {isOverlayOpen && <Overlay />}
+        <p style={{zIndex:"1", fontSize:"100px", }}>gftyftyufyufyufguigiugiu</p>
       <input
         type="file"
-        onChange={handleFileChange}
+        onChange={toggleOverlay}
         className="hidden"
         id="avatarInput"
         accept="image/*"
       />
-      <label htmlFor="avatarInput" className="cursor-pointer">
+      <button onClick={toggleOverlay}>Open Overlay</button>
+      {isOverlayOpen && <Overlay />}
+      {/* <label htmlFor="avatarInput" className="cursor-pointer">
         <img
           src={preview}
           height={192}
@@ -44,7 +59,7 @@ const ImageCrop = () => {
           className="object-cover rounded-full h-48 w-48"
           alt=""
         />
-      </label>
+      </label> */}
 
       <Modal open={openModal} handleClose={() => setOpenModal(false)}>
         <ImageCropModalContent handleDone={handleDone} handleClose={() => setOpenModal(false)} />

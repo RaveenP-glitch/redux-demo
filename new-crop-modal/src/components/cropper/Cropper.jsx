@@ -11,7 +11,7 @@ const Cropper = () => {
       crop={crop}
       zoom={zoom}
       rotation={rotation}
-      cropShape="square"
+      cropShape="round"
       aspect={1}
       onCropChange={setCrop}
       onCropComplete={onCropComplete}
