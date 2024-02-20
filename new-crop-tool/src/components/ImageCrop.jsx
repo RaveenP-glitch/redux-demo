@@ -9,7 +9,7 @@ const ImageCrop = () => {
   const [openModal, setOpenModal] = useState(false);
   const [preview, setPreview] = useState(user1);
 
-  const { getProcessedImage, setImage, resetStates } = useImageCropContext();
+  const { getProcessedImage, setImage, resetStates, handleRotateLeftCw, handleRotateRightCw } = useImageCropContext();
 
   const handleDone = async () => {
     const avatar = await getProcessedImage();
@@ -37,15 +37,15 @@ const ImageCrop = () => {
       <label htmlFor="avatarInput" className="cursor-pointer">
         <img
           src={preview}
-          height={192}
-          width={192}
-          className="object-cover h-48 w-48"
+          height={185}
+          width={225}
+          className="object-cover h-48 w-88"
           alt=""
         />
       </label>
 
       <Modal open={openModal} handleClose={() => setOpenModal(false)}>
-        <ImageCropModalContent handleDone={handleDone} handleClose={() => setOpenModal(false)} />
+        <ImageCropModalContent handleDone={handleDone} handleClose={() => setOpenModal(false)} handleRotateLeft={handleRotateLeftCw} handleRotateRight={handleRotateRightCw}/>
       </Modal>
     </div>
   );

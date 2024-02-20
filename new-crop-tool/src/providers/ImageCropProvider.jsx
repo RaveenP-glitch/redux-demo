@@ -49,6 +49,14 @@ const ImageCropProvider = ({
     setRotation(rotation - rotation_step);
   };
 
+  const handleRotateRightCw = () => {
+    setRotation(rotation + 90);
+  }
+
+  const handleRotateLeftCw = () => {
+    setRotation(rotation - 90);
+  }
+
   const getProcessedImage = async () => {
     if (image && croppedAreaPixels) {
       const croppedImage = await getCroppedImg(image, croppedAreaPixels, rotation);
@@ -86,6 +94,8 @@ const ImageCropProvider = ({
         handleZoomOut,
         handleRotateAntiCw,
         handleRotateCw,
+        handleRotateLeftCw,
+        handleRotateRightCw,
         max_zoom,
         min_zoom,
         zoom_step,

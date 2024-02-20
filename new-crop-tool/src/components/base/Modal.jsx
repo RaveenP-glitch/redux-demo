@@ -13,7 +13,7 @@ const Modal = ({ open, children }) => {
           <div className="absolute inset-0 bg-gray-900 opacity-75"></div>
           <span className="hidden sm:inline-block sm:align-middle sm:h-screen">​</span>
           <div
-            className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full"
+            className="inline-block align-center bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
