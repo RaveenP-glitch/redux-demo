@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import { readFile } from '../helpers/cropImage';
 import { useImageCropContext } from '../providers/ImageCropProvider';
 import Button from '../components/base/Button';
@@ -7,52 +8,69 @@ import { LuRotateCcw, LuRotateCw } from "react-icons/lu";
 
 const ImageCropModalContent = ({ handleDone, handleClose, handleRotateLeft, handleRotateRight }) => {
   const { setImage } = useImageCropContext();
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = async ({ target: { files } }) => {
-    const file = files && files[0];
-    const imageDataUrl = await readFile(file);
-    setImage(imageDataUrl);
+    try {
+      setLoading(true);
+      const file = files && files[0];
+      const imageDataUrl = await readFile(file);
+      setImage(imageDataUrl);
+    } catch (error) {
+      // Handle error as needed
+      console.error('Error reading file:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="text-center relative">
-      <h5 className="text-gray-800 mb-4 font-semibold text-left">Edit Image</h5>
-      <p className='text-gray-800 text-sm text-left mb-4'>Uploaded: user_1.png</p>
-      <div className="border border-dashed border-gray-200 p-6">
-        <div className="flex justify-center">
-          <div className="crop-container mb-4">
+    <div style={{ textAlign: 'center', position: 'relative' }}>
+      <h5 style={{ color: '#333', marginBottom: '1rem', fontWeight: '600', textAlign: 'left' }}>Edit Image</h5>
+      <p style={{ color: '#333', fontSize: '0.875rem', textAlign: 'left', marginBottom: '1rem' }}>Uploaded: user_1.png</p>
+      {/* <div style={{ border: '1px dashed #e2e8f0', padding: '1.5rem' }}> */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className='crop-container' style={{ marginBottom: '1rem' }}>
             <CropperTool />
           </div>
         </div>
-        <button className='m-2' onClick={handleRotateLeft}>
-            <LuRotateCcw />
+        <p className='' style={{color: 'gray', fontSize: '0.75rem', lineHeight: '1rem'}}>Drag to reposition image</p>
+        <button style={{ margin: '0.5rem' }} onClick={handleRotateLeft}>
+          <LuRotateCcw />
         </button>
-        <button className='m-2' onClick={handleRotateRight}>
-            <LuRotateCw />
+        <button style={{ margin: '0.5rem' }} onClick={handleRotateRight}>
+          <LuRotateCw />
         </button>
-        <ZoomSlider className="mb-4" />
-        <RotationSlider className="mb-4" />
-        <input
-          type="file"
-          multiple
-          onChange={handleFileChange}
-          className="hidden"
-          id="avatarInput"
-          accept="image/*"
-        />
+        <ZoomSlider style={{ marginBottom: '1rem' }} />
+        <RotationSlider style={{ marginBottom: '1rem' }} />
 
-        <Button variant="light" className="shadow w-full mb-4 hover:shadow-lg">
-          <label htmlFor="avatarInput">Change Image</label>
-        </Button>
-        <div className="flex gap-2">
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" className="w-full" onClick={handleDone}>
-            Save
-          </Button>
+        <div>
+        {loading ? (
+            // Display loading screen or add the spinner here
+            <div>Loading...</div>
+        ) : (
+            <input
+            type="file"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+            id="avatarInput"
+            accept="image/*"
+            />
+        )}
         </div>
-      </div>
+  
+        <button style={{ boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', width: '100%', margin: '1rem 0', cursor: 'pointer' }} onClick={() => document.getElementById('avatarInput').click()}>
+          Change Image
+        </button>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button style={{ background: '#e2e8f0', color: '#333', padding: '0.5rem', border: 'none', borderRadius: '0.25rem', cursor: 'pointer' }} onClick={handleClose}>
+            Cancel
+          </button>
+          <button style={{ background: '#3490dc', color: '#fff', padding: '0.5rem', border: 'none', borderRadius: '0.25rem', cursor: 'pointer', width: '100%' }} onClick={handleDone}>
+            Save
+          </button>
+        </div>
+      {/* </div> */}
     </div>
   );
 };

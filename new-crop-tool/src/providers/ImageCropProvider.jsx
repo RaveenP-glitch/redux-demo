@@ -5,7 +5,7 @@ import getCroppedImg from '../helpers/cropImage';
 export const ImageCropContext = createContext({});
 
 const defaultImage = null;
-const defaultCrop = { x: 0, y: 0 };
+const defaultCrop = { x: 372, y: 185 };
 const defaultRotation = 0;
 const defaultZoom = 1;
 const defaultCroppedAreaPixels = null;

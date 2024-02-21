@@ -26,24 +26,25 @@ const ImageCrop = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex justify-center items-center">
+    <div className="h-screen" style={{ backgroundColor: '#f0f0f0', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <input
         type="file"
         onChange={handleFileChange}
-        className="hidden"
+        style={{ display: 'none' }}
         id="avatarInput"
         accept="image/*"
       />
-      <label htmlFor="avatarInput" className="cursor-pointer">
+      <label htmlFor="avatarInput" style={{ cursor: 'pointer' }}>
         <img
           src={preview}
           height={185}
-          width={225}
-          className="object-cover h-48 w-88"
+          width={385}
+          style={{ objectFit: 'cover', height: '14rem', width: '29rem' }}
           alt=""
         />
+        <p style={{color: 'gray'}}>Click on the image to change.</p>
       </label>
-
+  
       <Modal open={openModal} handleClose={() => setOpenModal(false)}>
         <ImageCropModalContent handleDone={handleDone} handleClose={() => setOpenModal(false)} handleRotateLeft={handleRotateLeftCw} handleRotateRight={handleRotateRightCw}/>
       </Modal>
