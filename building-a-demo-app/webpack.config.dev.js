@@ -20,12 +20,12 @@ module.exports = {
     historyApiFallback: true,
     disableHostCheck: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-    https: false
+    https: false 
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/index.html",
-      favicon: "src/favicon.ico"
+      favicon: "src/favicon.ico"  
     })
   ],
   module: {

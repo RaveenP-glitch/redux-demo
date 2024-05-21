@@ -7,5 +7,9 @@ nav {
     padding: 20px 0 20px 0;
 }
 
-
+.jumbotron {
+    background-color: rgb(240, 235, 228);
+    padding: 1rem;
+    border-radius: 5px;
+}
 

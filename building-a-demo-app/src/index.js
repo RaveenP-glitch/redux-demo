@@ -6,9 +6,11 @@ import App from './components/App';
 import "./index.css";
 
 function Hi() {
-  <Router>
-    <App />
-  </Router>
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
 }
 
 render(<Hi />, document.getElementById("app"));
